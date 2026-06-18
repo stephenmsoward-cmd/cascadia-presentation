@@ -557,6 +557,8 @@
   .slide:has(#score-reveal.revealed) #score-matrix th:nth-child(6),
   .slide:has(#score-reveal.revealed) #score-matrix th:nth-child(7) { opacity: 1; }
   #score-reveal { position: absolute; width: 0; height: 0; overflow: hidden; }
+  .appendix-link { cursor: pointer; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.2); text-underline-offset: 2px; transition: color 0.2s; }
+  .appendix-link:hover { color: var(--muted); }
 </style>
 </head>
 <body>
@@ -853,7 +855,7 @@
         </div>
       </div>
     </div>
-    <p style="font-size: 12px; color: var(--muted-dim); margin-top: 18px;">↗ Full discovery question set and interview methodology — Appendix A3</p>
+    <p style="font-size: 12px; color: var(--muted-dim); margin-top: 18px;">↗ Full discovery question set and interview methodology — <span class="appendix-link" onclick="jumpToSlide(3)">Appendix A3</span></p>
   </div>
 
   <!-- SLIDE 7: SCORING MATRIX -->
@@ -1050,7 +1052,7 @@
       <p style="font-size: 13px; max-width: none;"><span class="highlight">Policy doc updated?</span> The knowledge base refreshes — every agent immediately has the correct answer. No outdated answers, no stale policies memorized from last quarter's training.</p>
     </div>
     <div class="discussion step-item">Does this match how you've seen knowledge base tools land in contact center environments?</div>
-    <p style="font-size: 12px; color: var(--muted-dim); margin-top: 18px;">↗ Full annotated workflow and customer experience before/after — Appendix A4 · A7</p>
+    <p style="font-size: 12px; color: var(--muted-dim); margin-top: 18px;">↗ Full annotated workflow and customer experience before/after — <span class="appendix-link" onclick="jumpToSlide(4)">Appendix A4</span> · <span class="appendix-link" onclick="jumpToSlide(7)">Appendix A7</span></p>
   </div>
 
   <!-- SLIDE 11: THE BUILD -->
@@ -1195,7 +1197,7 @@
         </div>
       </div>
     </div>
-    <p style="font-size: 12px; color: var(--muted-dim); margin-top: 18px;">↗ Longer-term workforce and capability evolution — Appendix A6</p>
+    <p style="font-size: 12px; color: var(--muted-dim); margin-top: 18px;">↗ Longer-term workforce and capability evolution — <span class="appendix-link" onclick="jumpToSlide(6)">Appendix A6</span></p>
   </div>
 
   <!-- SLIDE 15: CLOSE / EXTENSION -->
@@ -1240,7 +1242,7 @@
         </div>
       </div>
     </div>
-    <p style="font-size: 12px; color: var(--muted-dim); margin-top: 18px;">↗ Extension architecture and scoping detail — Appendix A5</p>
+    <p style="font-size: 12px; color: var(--muted-dim); margin-top: 18px;">↗ Extension architecture and scoping detail — <span class="appendix-link" onclick="jumpToSlide(5)">Appendix A5</span></p>
   </div>
 
   <!-- QUESTIONS SLIDE -->
@@ -1653,6 +1655,14 @@
   function jumpToAppendix() {
     slides[current].classList.remove('active');
     current = slides.indexOf(appendixSlides[0]);
+    slides[current].classList.add('active');
+    revealSteps(slides[current], 1);
+    update();
+  }
+
+  function jumpToSlide(appendixNum) {
+    slides[current].classList.remove('active');
+    current = slides.indexOf(appendixSlides[appendixNum - 1]);
     slides[current].classList.add('active');
     revealSteps(slides[current], 1);
     update();
