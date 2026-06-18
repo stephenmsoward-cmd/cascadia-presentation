@@ -548,6 +548,15 @@
   .flow-stepped .step-item.revealed + .flow-arrow {
     opacity: 1;
   }
+  #score-matrix td:nth-child(6),
+  #score-matrix td:nth-child(7),
+  #score-matrix th:nth-child(6),
+  #score-matrix th:nth-child(7) { opacity: 0; transition: opacity 0.5s ease; }
+  .slide:has(#score-reveal.revealed) #score-matrix td:nth-child(6),
+  .slide:has(#score-reveal.revealed) #score-matrix td:nth-child(7),
+  .slide:has(#score-reveal.revealed) #score-matrix th:nth-child(6),
+  .slide:has(#score-reveal.revealed) #score-matrix th:nth-child(7) { opacity: 1; }
+  #score-reveal { position: absolute; width: 0; height: 0; overflow: hidden; }
 </style>
 </head>
 <body>
@@ -852,7 +861,7 @@
     <div class="slide-label">Prioritization</div>
     <h2>One area wins on the axes that matter most</h2>
     <p style="margin-bottom: 10px; font-size: 14px;">Each area scored 1–3 (●=low → ●●●=high) on volume/urgency, consistency problem, AI fit, and build feasibility — 12 max.</p>
-    <table class="score-table">
+    <table class="score-table" id="score-matrix">
       <thead>
         <tr>
           <th>Area</th>
@@ -893,6 +902,15 @@
           <td><span class="badge green">Wave 3</span></td>
         </tr>
         <tr class="step-item">
+          <td class="row-name">Sched. Changes (IRSC) *</td>
+          <td>●●●<br><span style="font-size:11px; color:var(--muted);">Continuous, year-round; thousands of affected bookings per cycle</span></td>
+          <td>●●<br><span style="font-size:11px; color:var(--muted);">Waiver eligibility + response quality varies by agent</span></td>
+          <td>●●●<br><span style="font-size:11px; color:var(--muted);">Outreach drafting, severity triage, alternative routing</span></td>
+          <td>●●<br><span style="font-size:11px; color:var(--muted);">Needs booking data access; no real-time GDS pressure</span></td>
+          <td class="total">10</td>
+          <td><span class="badge amber">Wave 2</span></td>
+        </tr>
+        <tr class="step-item">
           <td class="row-name">Email / Social Care</td>
           <td>●●<br><span style="font-size:11px; color:var(--muted);">50k/mo, queue 4 days behind</span></td>
           <td>●●<br><span style="font-size:11px; color:var(--muted);">Tone + accuracy drift across reps</span></td>
@@ -921,6 +939,8 @@
         </tr>
       </tbody>
     </table>
+    <p style="font-size: 11px; color: var(--muted-dim); margin-top: 8px;">* Added beyond the initial brief — IRSC is distinct from day-of disruption: planned, outbound, year-round.</p>
+    <div id="score-reveal" class="step-item"></div>
     <div class="discussion step-item">Does this match where you'd expect a division like this to feel the most pain — or have you seen different pressure points in similar engagements?</div>
   </div>
 
