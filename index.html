@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✈ Cascadia Airways — AI Workflow Engagement</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+<meta property="og:title" content="Cascadia Airways — Agent Knowledge & Ramp">
+<meta property="og:description" content="A 12-week AI workflow engagement: transforming how 3,000 customer ops agents access policy knowledge and ramp to proficiency.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stephenmsoward-cmd.github.io/cascadia-presentation/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cascadia Airways — Agent Knowledge & Ramp">
+<meta name="twitter:description" content="A 12-week AI workflow engagement: transforming how 3,000 customer ops agents access policy knowledge and ramp to proficiency.">
+<style>
+  :root {
+    --bg: #0a1120;
+    --bg2: #0f1d35;
+    --card: rgba(255,255,255,0.045);
+    --card-hover: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.09);
+    --text: #f4f7fb;
+    --muted: #93a3b8;
+    --muted-dim: #5b6b82;
+    --blue: #60a5fa;
+    --blue-dim: rgba(96,165,250,0.14);
+    --amber: #fbbf24;
+    --amber-dim: rgba(251,191,36,0.11);
+    --green: #34d399;
+    --green-dim: rgba(52,211,153,0.11);
+    --red: #f87171;
+    --red-dim: rgba(248,113,113,0.11);
+    --purple: #a78bfa;
+    --grad: linear-gradient(90deg, #60a5fa 0%, #a78bfa 100%);
+    --grad-soft: linear-gradient(90deg, #93c5fd 0%, #c4b5fd 100%);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* PROGRESS BAR */
+  #progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: var(--grad);
+    transition: width 0.35s cubic-bezier(0.4,0,0.2,1);
+    z-index: 100;
+  }
+
+  /* SLIDE CONTAINER */
+  #deck {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+  .slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 58px 92px;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 0; left: 0;
+  }
+  .slide.active { display: flex; animation: fade 0.4s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  /* SLIDE LABEL */
+  .slide-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .slide-label::after {
+    content: '';
+    flex: 0 0 28px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--blue), transparent);
+  }
+  .slide-label.amber { color: var(--amber); }
+  .slide-label.amber::after { background: linear-gradient(90deg, var(--amber), transparent); }
+  .slide-label.green { color: var(--green); }
+  .slide-label.purple { color: var(--purple); }
+
+  /* TYPOGRAPHY */
+  h1 {
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -1px;
+    margin-bottom: 22px;
+  }
+  h2 {
+    font-size: 37px;
+    font-weight: 750;
+    line-height: 1.18;
+    letter-spacing: -0.6px;
+    margin-bottom: 18px;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 650;
+    margin-bottom: 8px;
+  }
+  p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: 720px;
+  }
+  .lead {
+    font-size: 23px;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 780px;
+    margin-bottom: 34px;
+  }
+  .highlight { color: var(--text); }
+  .blue { color: var(--blue); }
+  .amber { color: var(--amber); }
+  .green { color: var(--green); }
+  .red { color: var(--red); }
+  .purple { color: var(--purple); }
+  .grad-text {
+    background: var(--grad-soft);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* LINKS */
+  a {
+    color: var(--blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(96,165,250,0.35);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  a:hover { border-bottom-color: var(--blue); color: #93c5fd; }
+  .src-link {
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+    border-bottom: none;
+    color: var(--muted);
+  }
+  .src-link::before { content: '↗'; color: var(--blue); }
+  .src-link:hover { color: var(--blue); border-bottom: none; }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+  }
+  .card.blue-tint { background: var(--blue-dim); border-color: rgba(96,165,250,0.22); }
+  .card.amber-tint { background: var(--amber-dim); border-color: rgba(251,191,36,0.22); }
+  .card.green-tint { background: var(--green-dim); border-color: rgba(52,211,153,0.22); }
+  .card.red-tint { background: var(--red-dim); border-color: rgba(248,113,113,0.22); }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+
+  /* STAT GRID */
+  .stat { text-align: center; padding: 22px 16px; }
+  .stat-number {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--blue);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+  .stat-number.amber { color: var(--amber); }
+  .stat-number.red { color: var(--red); }
+  .stat-number.green { color: var(--green); }
+  .stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  /* BULLET LIST */
+  .bullets { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .bullets li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .bullets li::before {
+    content: '→';
+    color: var(--blue);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .bullets li .highlight { color: var(--text); font-weight: 500; }
+
+  /* TIMELINE */
+  .timeline { display: flex; gap: 0; margin-top: 8px; }
+  .phase {
+    flex: 1;
+    padding: 20px 20px 20px 22px;
+    border-left: 2px solid var(--border);
+    position: relative;
+  }
+  .phase::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 24px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 0 4px rgba(96,165,250,0.12);
+  }
+  .phase-weeks {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 6px;
+  }
+  .phase-title {
+    font-size: 16px;
+    font-weight: 650;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .phase-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .phase-items li {
+    font-size: 13px;
+    color: var(--muted);
+    padding-left: 12px;
+    position: relative;
+  }
+  .phase-items li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+
+  /* SCORECARD (slide 7) */
+  .scorecard { display: flex; flex-direction: column; gap: 11px; margin-top: 10px; }
+  .score-row {
+    display: grid;
+    grid-template-columns: 250px 1fr 44px 92px;
+    align-items: center;
+    gap: 22px;
+    padding: 14px 22px;
+    border-radius: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+  .score-row.win { background: var(--blue-dim); border-color: rgba(96,165,250,0.32); }
+  .area-name { font-size: 15px; font-weight: 650; color: var(--text); }
+  .area-why { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.35; }
+  .score-bar-track {
+    height: 9px;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.05);
+    overflow: hidden;
+  }
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 5px;
+    background: #3f4f66;
+  }
+  .score-row.win .score-bar-fill { background: var(--grad); }
+  .score-total {
+    font-size: 23px;
+    font-weight: 800;
+    text-align: right;
+    color: var(--muted);
+    letter-spacing: -0.5px;
+  }
+  .score-row.win .score-total { color: var(--blue); }
+
+  /* TABLE */
+  .score-table { width: 100%; border-collapse: collapse; }
+  .score-table th {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .score-table td {
+    padding: 10px 12px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--muted);
+  }
+  .score-table tr:last-child td { border-bottom: none; }
+  .score-table .row-name { color: var(--text); font-weight: 500; }
+  .score-table .row-pick { background: rgba(96,165,250,0.08); }
+  .score-table .row-pick td { color: var(--text); }
+  .score-table .total { font-weight: 700; color: var(--text); }
+
+  /* WORKFLOW */
+  .flow {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 12px 0;
+  }
+  .flow-step {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 9px 15px;
+    font-size: 13px;
+    color: var(--muted);
+    white-space: nowrap;
+    min-height: 54px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .flow-step.pain {
+    border-color: rgba(248,113,113,0.32);
+    background: var(--red-dim);
+    color: var(--text);
+  }
+  .flow-step.ai {
+    border-color: rgba(96,165,250,0.32);
+    background: var(--blue-dim);
+    color: var(--text);
+  }
+  .flow-step.human {
+    border-color: rgba(52,211,153,0.32);
+    background: var(--green-dim);
+    color: var(--text);
+  }
+  .flow-arrow { color: var(--muted-dim); font-size: 16px; margin-top: 17px; }
+  .flow-time {
+    font-size: 11px;
+    color: var(--red);
+    display: block;
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  /* DISCUSSION CRUMB (amber) — a point to talk through live */
+  .discussion {
+    margin-top: 26px;
+    background: var(--amber-dim);
+    border: 1px solid rgba(251,191,36,0.18);
+    border-radius: 11px;
+    padding: 13px 18px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    font-size: 14px;
+    color: var(--amber);
+  }
+  .discussion::before {
+    content: 'DISCUSS';
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: rgba(251,191,36,0.18);
+    color: var(--amber);
+    padding: 4px 9px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  /* ASSUMPTION CALLOUT (purple) — a working assumption to confirm */
+  .assumption {
+    margin-top: 22px;
+    background: rgba(167,139,250,0.10);
+    border: 1px solid rgba(167,139,250,0.25);
+    border-radius: 11px;
+    padding: 13px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #c4b5fd;
+  }
+  .assumption::before {
+    content: 'ASSUMPTION';
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: rgba(167,139,250,0.2);
+    color: #c4b5fd;
+    padding: 4px 9px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .assumption strong { color: #ddd6fe; }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 4px 11px;
+    border-radius: 20px;
+    background: var(--blue-dim);
+    color: var(--blue);
+    border: 1px solid rgba(96,165,250,0.25);
+    white-space: nowrap;
+  }
+  .badge.amber { background: var(--amber-dim); color: var(--amber); border-color: rgba(251,191,36,0.25); }
+  .badge.green { background: var(--green-dim); color: var(--green); border-color: rgba(52,211,153,0.25); }
+
+  /* DIVIDER */
+  .divider {
+    width: 54px;
+    height: 3px;
+    background: var(--grad);
+    border-radius: 2px;
+    margin: 22px 0;
+  }
+
+  /* NAVIGATION */
+  #nav {
+    position: fixed;
+    bottom: 28px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 100;
+  }
+  #slide-count {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    min-width: 52px;
+    text-align: center;
+  }
+  .nav-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  .nav-btn:hover { background: var(--blue); border-color: var(--blue); color: #0a1120; }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .nav-btn:disabled:hover { background: var(--card); border-color: var(--border); color: var(--text); }
+
+  /* SECTION / TITLE BACKDROPS */
+  .title-slide {
+    background:
+      radial-gradient(900px 500px at 18% 12%, rgba(96,165,250,0.16), transparent 60%),
+      radial-gradient(800px 500px at 85% 80%, rgba(167,139,250,0.14), transparent 60%),
+      linear-gradient(145deg, #0a1120 0%, #0d1f3c 60%, #0a1120 100%);
+  }
+  .title-slide h1 { font-size: 60px; max-width: 880px; line-height: 1.08; }
+  .title-meta { display: flex; gap: 26px; margin-top: 34px; flex-wrap: wrap; }
+  .title-meta-item { font-size: 13px; color: var(--muted); }
+  .title-meta-item strong { color: var(--text); }
+
+  /* APPENDIX TAG */
+  .appendix-tag {
+    position: absolute;
+    top: 26px;
+    right: 92px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--card);
+    padding: 5px 13px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+
+  /* KEYBOARD HINT */
+  #keyhint {
+    position: fixed;
+    bottom: 30px;
+    left: 40px;
+    font-size: 11px;
+    color: #334155;
+    letter-spacing: 0.5px;
+  }
+
+  /* STEPPED REVEAL */
+  .step-item {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .step-item.revealed {
+    opacity: 1;
+    transform: none;
+  }
+  /* Table rows: fade only — transform on <tr> is unreliable cross-browser */
+  tr.step-item { transform: none; }
+
+  /* Flow diagrams: arrows auto-follow their preceding step */
+  .flow-stepped .flow-arrow {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .flow-stepped .step-item.revealed + .flow-arrow {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<div id="deck">
+
+  <!-- SLIDE 1: TITLE -->
+  <div class="slide title-slide active" data-index="m">
+    <div class="slide-label">Tribe AI · Cascadia Airways Engagement</div>
+    <h1>From licenses to <span class="grad-text">workflows</span></h1>
+    <p class="lead">A 12-week engagement plan for transforming how Cascadia's Customer Operations team works — and making the change stick.</p>
+    <div class="divider"></div>
+    <div class="title-meta">
+      <div class="title-meta-item"><strong>Client:</strong> Cascadia Airways — Customer Operations</div>
+      <div class="title-meta-item"><strong>Scope:</strong> 3,000 employees · 6 workflow areas</div>
+      <div class="title-meta-item"><strong>Timeline:</strong> 12-week engagement</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: METHOD -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">Method</div>
+    <h2>Built the way I'd run the work</h2>
+    <div class="grid-2" style="margin-top: 22px; align-items: start; gap: 34px;">
+      <div>
+        <ul class="bullets" style="margin-bottom: 26px;">
+          <li><span><span class="highlight">Synthesis, accelerated.</span> I used Claude to digest the source material, surface industry benchmarks, and pressure-test the workflow assumptions — turning days of desk research into hours.</span></li>
+          <li><span><span class="highlight">Judgment stayed human.</span> The prioritization, the sequencing, the adoption thesis, the extension framing — those are mine. The tooling sped up the inputs. The calls are mine.</span></li>
+          <li><span><span class="highlight">The artifact is the method.</span> This deck was built and shipped the same way I'd run the engagement itself — the most honest demonstration of how I work that I can offer.</span></li>
+          <li><span>The operating model in one line: <span class="highlight">machines for synthesis, people for judgment.</span> That's what I'd bring to Cascadia.</span></li>
+          <li><span>Extensions are scoped with <span class="highlight">Tribe's full delivery team</span> — consistent methodology, escalating depth.</span></li>
+        </ul>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 18px; justify-content: center;">
+        <div>
+          <p style="font-size: 13px; color: var(--muted-dim); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 14px;">Sources consulted — full list in Appendix A8</p>
+          <ul class="bullets">
+            <li style="font-size: 13px;"><span><a href="https://www.customerexperiencedive.com/news/delta-begins-roll-out-generative-ai-virtual-assistant-concierge/803899/" target="_blank">CX Dive: Delta Concierge (Oct 2025)</a></span></li>
+            <li style="font-size: 13px;"><span><a href="https://www.calabrio.com/state-of-the-contact-center-2025/" target="_blank">Calabrio: State of the Contact Center (2025)</a></span></li>
+            <li style="font-size: 13px;"><span><a href="https://www.bcg.com/publications/2025/digital-strategy-can-take-airlines-to-new-heights" target="_blank">BCG: Digital Strategy for Airlines (2025)</a></span></li>
+            <li style="font-size: 13px;"><span><a href="https://amadeus.com/documents/en/airlines/white-paper/shaping-the-future-of-airline-disruption-management.pdf" target="_blank">Amadeus: Airline Disruption Management</a></span></li>
+            <li style="font-size: 13px;"><span><a href="https://www.entrepreneur.com/business-news/klarna-ceo-reverses-course-by-hiring-more-humans-not-ai/491396" target="_blank">Klarna AI reversal — public reporting (2025)</a></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: AGENDA -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">Overview</div>
+    <h2>What we'll cover</h2>
+    <div style="display: flex; gap: 12px; margin-top: 36px; align-items: stretch;">
+      <div style="flex: 1; background: var(--blue-dim); border: 1px solid rgba(96,165,250,0.22); border-radius: 14px; padding: 22px 14px; text-align: center;">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 10px;">01</div>
+        <div style="font-size: 15px; font-weight: 650; color: var(--text); margin-bottom: 6px;">Situation</div>
+        <div style="font-size: 12px; color: var(--muted);">6 Months · 15% Usage · Why</div>
+      </div>
+      <div style="flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 14px; text-align: center;">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px;">02</div>
+        <div style="font-size: 15px; font-weight: 650; color: var(--text); margin-bottom: 6px;">The Approach</div>
+        <div style="font-size: 12px; color: var(--muted);">12 Weeks · How I'd Run It</div>
+      </div>
+      <div style="flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 14px; text-align: center;">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px;">03</div>
+        <div style="font-size: 15px; font-weight: 650; color: var(--text); margin-bottom: 6px;">The Pick</div>
+        <div style="font-size: 12px; color: var(--muted);">Why Agent Knowledge First</div>
+      </div>
+      <div style="flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 14px; text-align: center;">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px;">04</div>
+        <div style="font-size: 15px; font-weight: 650; color: var(--text); margin-bottom: 6px;">The Design</div>
+        <div style="font-size: 12px; color: var(--muted);">Before / After · What Agents See</div>
+      </div>
+      <div style="flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 14px; text-align: center;">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px;">05</div>
+        <div style="font-size: 15px; font-weight: 650; color: var(--text); margin-bottom: 6px;">Adoption</div>
+        <div style="font-size: 12px; color: var(--muted);">Build · Metrics · Scale</div>
+      </div>
+      <div style="flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 14px; text-align: center;">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px;">06</div>
+        <div style="font-size: 15px; font-weight: 650; color: var(--text); margin-bottom: 6px;">Close</div>
+        <div style="font-size: 12px; color: var(--muted);">Week 12 + Extension Roadmap</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: THE SITUATION -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">The Starting Point</div>
+    <h2>Claude Enterprise has been live for 6 months.<br>Nothing about how work gets done has changed.</h2>
+    <div class="divider"></div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 26px;">
+      <div>
+        <p style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px;">Tool adoption</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="card stat">
+            <div class="stat-number">3,000</div>
+            <div class="stat-label">Employees in Customer Ops</div>
+          </div>
+          <div class="card stat">
+            <div class="stat-number red">15%</div>
+            <div class="stat-label">Weekly active Claude users after 6 months</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--amber); margin-bottom: 12px;">Business gaps</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="card stat">
+            <div class="stat-number amber">90k</div>
+            <div class="stat-label">Case backlog in refunds — 35-day avg resolution</div>
+          </div>
+          <div class="card stat">
+            <div class="stat-number red">2×</div>
+            <div class="stat-label">Handle time: new agents vs. veterans</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="bullets">
+      <li><span>15% usage after 6 months points to one thing: <span class="highlight">the work was never redesigned around the tool.</span></span></li>
+    </ul>
+  </div>
+
+  <!-- SLIDE 3: TWO FUTURES -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">The Choice</div>
+    <h2>Two ways this plays out</h2>
+    <div class="grid-2" style="margin-top: 18px; margin-bottom: 22px;">
+      <div class="card red-tint">
+        <h3 class="red">The Klarna Path</h3>
+        <ul class="bullets" style="margin-top: 10px;">
+          <li>Automate everything, move fast, cut headcount</li>
+          <li>Discover AI can't handle complexity at the volume you assumed</li>
+          <li>Quietly rehire; savings evaporate; brand damage doesn't</li>
+          <li><span class="highlight">Result: you've made the same mistakes cheaper</span></li>
+        </ul>
+      </div>
+      <div class="card green-tint">
+        <h3 class="green">The Ikea Path</h3>
+        <ul class="bullets" style="margin-top: 10px;">
+          <li>AI absorbs commodity work: lookups, drafts, logging</li>
+          <li>Agents move up the value chain — genuine advisors, not process executors</li>
+          <li>Expertise is retained and deployed against higher-value moments</li>
+          <li><span class="highlight">Result: you scale capacity without scaling headcount</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="padding: 16px 22px;">
+      <p style="font-size: 14px; max-width: none;"><span class="highlight">Where the industry is heading:</span> Delta Concierge is live (Oct 2025). 98% of contact centers use AI — few have redesigned workflows around it (Calabrio). BCG projects 15–25% cost reductions for early movers in airline ops.</p>
+      <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:8px;">
+        <a class="src-link" href="https://www.customerexperiencedive.com/news/delta-begins-roll-out-generative-ai-virtual-assistant-concierge/803899/" target="_blank">CX Dive — Delta Concierge (Oct 2025)</a>
+        <a class="src-link" href="https://www.calabrio.com/state-of-the-contact-center-2025/" target="_blank">Calabrio — State of the Contact Center 2025</a>
+        <a class="src-link" href="https://www.bcg.com/publications/2025/digital-strategy-can-take-airlines-to-new-heights" target="_blank">BCG (2025)</a>
+      </div>
+    </div>
+    <div class="discussion step-item">Should we be thinking about this as a workforce transformation, or a productivity play — or both?</div>
+  </div>
+
+  <!-- SLIDE 4: WORKING ASSUMPTIONS -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">Ground Rules</div>
+    <h2>My assumptions going in</h2>
+    <div class="grid-2" style="margin-top: 18px; align-items: start; gap: 28px;">
+      <div>
+        <h3 style="font-size: 15px; margin-bottom: 12px; color: var(--blue);">How I'm framing the engagement</h3>
+        <ul class="bullets">
+          <li><span><span class="highlight">12 weeks earns the next 12.</span> The goal is momentum and proof, not a finished transformation — final outcomes are a 3–6 month story.</span></li>
+          <li><span><span class="highlight">One workflow goes deep</span> — and becomes the foundation every other improvement builds on.</span></li>
+          <li><span><span class="highlight">Claude Enterprise is already licensed</span> (given). Phase 1 needs no new vendor and no new procurement cycle.</span></li>
+          <li><span><span class="highlight">Prove it with 30 before scaling to 3,000.</span> The pilot defines what "works" means — and gives us real signal before any ask to expand.</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size: 15px; margin-bottom: 12px; color: var(--blue);">Assumed tech stack <span style="font-weight:400; color:var(--muted-dim); font-size:13px;">— confirm in discovery</span></h3>
+        <table class="score-table" style="font-size: 13px;">
+          <thead>
+            <tr><th>Layer</th><th>Assumed system</th><th>Confirm</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="row-name">PSS</td><td>Amadeus Altéa</td><td>API access for Phase 3</td></tr>
+            <tr><td class="row-name">CRM</td><td>Salesforce Service Cloud</td><td>Email-to-case in use?</td></tr>
+            <tr><td class="row-name">Contact center</td><td>Genesys Cloud</td><td>IVR · routing · WEM</td></tr>
+            <tr><td class="row-name">Email / productivity</td><td>Microsoft 365 / Outlook</td><td>Where the 50k queue lives</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="discussion step-item">Is this close to your actual stack? Where am I wrong — and what's already integrated?</div>
+  </div>
+
+  <!-- SLIDE 5: THE ENGAGEMENT -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">The Process</div>
+    <h2>The 12-week engagement</h2>
+    <p style="margin-bottom: 26px;">The point of 12 weeks: redesign one workflow so thoroughly that the business case for continuing writes itself.</p>
+    <div class="timeline">
+      <div class="phase step-item">
+        <div class="phase-weeks">Weeks 1–2</div>
+        <div class="phase-title">Discovery</div>
+        <ul class="phase-items">
+          <li>Shadow sessions with agents</li>
+          <li>Stakeholder 1-on-1s</li>
+          <li>Workflow + data audit</li>
+          <li>Map the trust landscape</li>
+        </ul>
+      </div>
+      <div class="phase step-item">
+        <div class="phase-weeks">Weeks 3–4</div>
+        <div class="phase-title">Prioritize + Design</div>
+        <ul class="phase-items">
+          <li>Score all six areas</li>
+          <li>Select primary target</li>
+          <li>Map before/after workflow</li>
+          <li>Define "good" + eval criteria</li>
+        </ul>
+      </div>
+      <div class="phase step-item">
+        <div class="phase-weeks">Weeks 5–8</div>
+        <div class="phase-title">Build + Pilot</div>
+        <ul class="phase-items">
+          <li>Phase 1 working version</li>
+          <li>Shadow mode with pilot team</li>
+          <li>Iterate on gaps</li>
+          <li>Track leading indicators</li>
+        </ul>
+      </div>
+      <div class="phase step-item">
+        <div class="phase-weeks">Weeks 9–12</div>
+        <div class="phase-title">Scale + Handoff</div>
+        <ul class="phase-items">
+          <li>Expand to second team</li>
+          <li>Adoption playbook</li>
+          <li>Division owns refresh cadence</li>
+          <li>Extension roadmap delivered</li>
+        </ul>
+      </div>
+    </div>
+    <div class="assumption step-item"><span>Week 12 delivers momentum and proof — <strong>not a completed transformation.</strong> Final outcomes (ramp time, sustained CSAT lift) are a 3–6 month story. We design for them in 12 weeks.</span></div>
+  </div>
+
+  <!-- ADOPTION FRAMING -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">Enablement + Adoption</div>
+    <h2>Why 85% aren't using it</h2>
+    <div class="grid-2" style="margin-top: 22px; align-items: start;">
+      <div>
+        <ul class="bullets" style="margin-bottom: 22px;">
+          <li><span><span class="highlight">85% aren't using it because no one redesigned the work around it.</span> The tool was available; it just didn't fit anywhere.</span></li>
+          <li><span>Mandating usage moves the weekly active metric. It doesn't move anything else. Agents comply; the work doesn't change.</span></li>
+          <li><span>Experienced agents built their value on policy expertise. <span class="highlight">An AI that retrieves policy doesn't feel neutral to them</span> — it threatens something real. The design has to give their expertise a role, not sideline it.</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="card">
+          <h3 style="font-size: 15px; margin-bottom: 8px;">The product growth lens</h3>
+          <p style="font-size: 14px;">Think of the workforce as the user base and the AI workflow as the product. The adoption problem breaks down the same way:</p>
+          <ul class="bullets" style="margin-top: 10px;">
+            <li style="font-size: 13px;"><span><strong>Awareness:</strong> knowledge share, supervisor champions</span></li>
+            <li style="font-size: 13px;"><span><strong>Activation:</strong> policy question answered in 20 seconds, not 6 minutes — that's the aha moment</span></li>
+            <li style="font-size: 13px;"><span><strong>Retention:</strong> the tool saves real time every shift</span></li>
+            <li style="font-size: 13px;"><span><strong>Growth loop:</strong> early adopters become peer advocates; usage compounds without a mandate</span></li>
+          </ul>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">Most internal rollouts stall at activation — the first use doesn't deliver enough value, and the tool is abandoned before the habit forms.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: DISCOVERY -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">The Process — Discovery</div>
+    <h2>Two weeks, no tooling.<br>Observe before designing.</h2>
+    <div class="grid-2" style="margin-top: 22px; align-items: start;">
+      <div>
+        <ul class="bullets">
+          <li><span><span class="highlight">Don't touch tooling for two weeks.</span> Observe actual work — not described work. The stated workflow and the actual workflow are almost always different.</span></li>
+          <li><span>Shadow agents handling real calls. Note where they pause, toggle screens, put customers on hold, ask a colleague.</span></li>
+          <li><span>The key question: <span class="highlight">"If you could hire someone to sit next to you and do just one thing, what would it be?"</span></span></li>
+          <li><span>Map the trust landscape before anything else — who's excited, who's quietly threatened, who holds the informal knowledge.</span></li>
+        </ul>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="card">
+          <h3 style="font-size: 15px; margin-bottom: 10px;" class="red">Agent trust problem</h3>
+          <p style="font-size: 14px;">Experienced agents have built their value around knowing the policies. For them, AI that retrieves policy threatens something they've earned. The design has to give them a way to bring that expertise into the system — not route around it.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size: 15px; margin-bottom: 10px;" class="amber">Customer trust problem</h3>
+          <p style="font-size: 14px;">Customers are conditioned by years of bad automation — IVR trees that don't resolve anything, bot replies that feel canned. A poorly designed AI layer reinforces exactly that expectation. The human stays visibly in the loop at every customer-facing touchpoint.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: SCORING MATRIX -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">Prioritization</div>
+    <h2>One area wins on the axes that matter most</h2>
+    <p style="margin-bottom: 10px; font-size: 14px;">Each area scored 1–3 (●=low → ●●●=high) on volume/urgency, consistency problem, AI fit, and build feasibility — 12 max.</p>
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th>Area</th>
+          <th>Volume / Urgency</th>
+          <th>Consistency Problem</th>
+          <th>AI Fit</th>
+          <th>Build Feasibility</th>
+          <th>Total</th>
+          <th>Wave</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="step-item">
+          <td class="row-name">Loyalty Program</td>
+          <td>●<br><span style="font-size:11px; color:var(--muted);">&lt;5% of volume (but 9× value)</span></td>
+          <td>●●<br><span style="font-size:11px; color:var(--muted);">Clear rules, occasional disputes</span></td>
+          <td>●●<br><span style="font-size:11px; color:var(--muted);">FAQ yes; status disputes need a human</span></td>
+          <td>●●●<br><span style="font-size:11px; color:var(--muted);">Self-contained, low integration</span></td>
+          <td class="total">8</td>
+          <td><span class="badge green">Wave 3</span></td>
+        </tr>
+        <tr class="step-item">
+          <td class="row-name">Baggage Claims</td>
+          <td>●●<br><span style="font-size:11px; color:var(--muted);">30k/mo, 19 days to reimburse</span></td>
+          <td>●●<br><span style="font-size:11px; color:var(--muted);">Process varies, outcome less subjective</span></td>
+          <td>●●<br><span style="font-size:11px; color:var(--muted);">Updates yes; tracing needs data</span></td>
+          <td>●●<br><span style="font-size:11px; color:var(--muted);">Tracing needs system integration</span></td>
+          <td class="total">8</td>
+          <td><span class="badge green">Wave 3</span></td>
+        </tr>
+        <tr class="step-item">
+          <td class="row-name">Refunds / Claims</td>
+          <td>●●●<br><span style="font-size:11px; color:var(--muted);">90k backlog, 35-day avg</span></td>
+          <td>●●●<br><span style="font-size:11px; color:var(--muted);">1 in 5 claims disputed by agents</span></td>
+          <td>●●<br><span style="font-size:11px; color:var(--muted);">Matrix-driven; edge cases need judgment</span></td>
+          <td>●<br><span style="font-size:11px; color:var(--muted);">Regulatory risk — tight evals first</span></td>
+          <td class="total">9</td>
+          <td><span class="badge green">Wave 3</span></td>
+        </tr>
+        <tr class="step-item">
+          <td class="row-name">Email / Social Care</td>
+          <td>●●<br><span style="font-size:11px; color:var(--muted);">50k/mo, queue 4 days behind</span></td>
+          <td>●●<br><span style="font-size:11px; color:var(--muted);">Tone + accuracy drift across reps</span></td>
+          <td>●●●<br><span style="font-size:11px; color:var(--muted);">Drafting; tone held by review gate</span></td>
+          <td>●●●<br><span style="font-size:11px; color:var(--muted);">No integration, fast feedback</span></td>
+          <td class="total">10</td>
+          <td><span class="badge amber">Wave 2</span></td>
+        </tr>
+        <tr class="step-item">
+          <td class="row-name">Disruption Rebooking</td>
+          <td>●●●<br><span style="font-size:11px; color:var(--muted);">18 days/yr, but tenfold spikes</span></td>
+          <td>●●<br><span style="font-size:11px; color:var(--muted);">Varies by agent under pressure</span></td>
+          <td>●●●<br><span style="font-size:11px; color:var(--muted);">Decision-support fit is clear</span></td>
+          <td>●●<br><span style="font-size:11px; color:var(--muted);">Episodic + needs GDS integration</span></td>
+          <td class="total">10</td>
+          <td><span class="badge amber">Wave 2</span></td>
+        </tr>
+        <tr class="row-pick step-item">
+          <td class="row-name">⭐ Agent Knowledge &amp; Ramp</td>
+          <td>●●●<br><span style="font-size:11px; color:var(--muted);">Every call, every agent, daily</span></td>
+          <td>●●●<br><span style="font-size:11px; color:var(--muted);">2× handle time, 8–10 wk ramp</span></td>
+          <td>●●●<br><span style="font-size:11px; color:var(--muted);">RAG on policy docs, always-on</span></td>
+          <td>●●●<br><span style="font-size:11px; color:var(--muted);">No integration in Phase 1</span></td>
+          <td class="total blue">12</td>
+          <td><span class="badge">Wave 1</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="discussion step-item">Does this match your read on where the division is feeling the most pain right now?</div>
+  </div>
+
+  <!-- SLIDE 8: THE PICK -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">The Target</div>
+    <h2>The pick: <span class="blue">Agent Knowledge &amp; Ramp</span></h2>
+    <div class="grid-2" style="margin-top: 22px; align-items: stretch;">
+      <div>
+        <div class="card blue-tint">
+          <h3 style="margin-bottom: 12px;">Why this first</h3>
+          <ul class="bullets">
+            <li><span><span class="highlight">Foundation:</span> policy lookup is the prerequisite for disruption decision support, refund consistency, everything else. Build the layer once; every subsequent workflow benefits.</span></li>
+            <li><span><span class="highlight">Always-on signal:</span> disruption is 18 days/year. Knowledge gaps are every call, every day, 3,000 employees.</span></li>
+            <li><span><span class="highlight">Safest pilot:</span> no live customer decisions at risk during testing. Shadow mode is genuinely low-stakes.</span></li>
+            <li><span><span class="highlight">Adoption flywheel:</span> new agents learn AI as their default. As they become veterans, that behavior stays. The adoption problem solves itself over time.</span></li>
+            <li><span><span class="highlight">Fast proof:</span> policy lookup speed is measurable in week 3. We don't wait 12 weeks for signal.</span></li>
+            <li><span><span class="highlight">Unlocks the roadmap:</span> disruption decision support and email drafting both build on this same knowledge layer — the foundation is shared.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px; justify-content: center;">
+        <div class="card step-item">
+          <h3 style="font-size: 14px; margin-bottom: 6px;" class="muted">How I'd confirm the pick</h3>
+          <ul class="bullets" style="margin-top: 4px;">
+            <li style="font-size: 13px;"><span>Shadow 6–8 agents: count how many times/call they search a policy doc or ask a supervisor</span></li>
+            <li style="font-size: 13px;"><span>Pull supervisor escalation logs — what % are policy lookup questions?</span></li>
+            <li style="font-size: 13px;"><span>Interview 5 new agents in their first month: what's the hardest part?</span></li>
+          </ul>
+        </div>
+        <div class="discussion step-item" style="margin-top: 0;">Does Agent Knowledge feel like the right first bet — or is there a workflow area you're seeing more pressure on right now?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: TODAY'S WORKFLOW -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">The Redesign — Before</div>
+    <h2>Agent Knowledge: how it works today</h2>
+    <p style="margin-bottom: 22px;">A passenger calls mid-disruption with a connecting itinerary on a partner carrier. The agent needs to know the rebooking rules.</p>
+    <div class="flow flow-stepped" style="margin-bottom: 8px;">
+      <div><div class="flow-step">Customer on hold</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="step-item"><div class="flow-step pain">GDS screen toggle<br><span style="font-size:11px;">Altéa / Sabre</span></div><span class="flow-time">2–3 min</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="step-item"><div class="flow-step pain">Search internal PDFs<br><span style="font-size:11px;">12+ policy docs</span></div><span class="flow-time">2–3 min</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="step-item"><div class="flow-step pain">Escalate to supervisor<br><span style="font-size:11px;">if still unclear</span></div><span class="flow-time">+ wait</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="step-item"><div class="flow-step pain">Answer — maybe<br><span style="font-size:11px;">may vary by agent</span></div></div>
+    </div>
+    <div class="grid-4 step-item" style="margin-top: 22px;">
+      <div class="card">
+        <div class="stat-number red" style="font-size: 28px; margin-bottom: 4px;">6–8 min</div>
+        <div class="stat-label">Time to answer a policy question on a live call</div>
+      </div>
+      <div class="card">
+        <div class="stat-number amber" style="font-size: 28px; margin-bottom: 4px;">1 in 5</div>
+        <div class="stat-label">Chance the answer differs from what another agent would give</div>
+      </div>
+      <div class="card">
+        <div class="stat-number red" style="font-size: 28px; margin-bottom: 4px;">8–10 wks</div>
+        <div class="stat-label">Until a new agent reaches policy fluency — at 35% annual attrition</div>
+      </div>
+      <div class="card">
+        <div class="stat-number red" style="font-size: 28px; margin-bottom: 4px;">10–15×</div>
+        <div class="stat-label">How many times supervisors field the same policy question each day</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: AFTER REDESIGN -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">The Redesign — After</div>
+    <h2>Agent Knowledge: after redesign</h2>
+    <div class="flow flow-stepped" style="margin-bottom: 22px;">
+      <div><div class="flow-step">Customer on hold</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="step-item"><div class="flow-step ai">Agent types natural<br>language question</div><span class="flow-time" style="color: var(--blue);">10 sec</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="step-item"><div class="flow-step ai">Claude searches<br>knowledge base</div><span class="flow-time" style="color: var(--blue);">5 sec</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="step-item"><div class="flow-step human">Cited answer<br>agent reviews</div><span class="flow-time" style="color: var(--green);">15 sec</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="step-item"><div class="flow-step human">Agent answers<br>customer</div></div>
+    </div>
+    <div class="grid-4 step-item" style="margin-top: 22px;">
+      <div class="card">
+        <div class="stat-number blue" style="font-size: 28px; margin-bottom: 4px;">30 sec</div>
+        <div class="stat-label">Policy question answered on a live call — cited, consistent, every time</div>
+      </div>
+      <div class="card">
+        <div class="stat-number green" style="font-size: 28px; margin-bottom: 4px;">1 in 1</div>
+        <div class="stat-label">Agents give the same answer — source document visible to verify</div>
+      </div>
+      <div class="card">
+        <div class="stat-number blue" style="font-size: 28px; margin-bottom: 4px;">4–5 wks</div>
+        <div class="stat-label">Target ramp to policy fluency — down from 8–10 weeks</div>
+      </div>
+      <div class="card">
+        <div class="stat-number green" style="font-size: 28px; margin-bottom: 4px;">≥30%</div>
+        <div class="stat-label">Target reduction in supervisor escalations from new agents by week 8</div>
+      </div>
+    </div>
+    <div class="discussion step-item">Does this match how you've seen knowledge base tools land in contact center environments?</div>
+  </div>
+
+  <!-- SLIDE 11: THE BUILD -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">The Build</div>
+    <h2>Standing it up</h2>
+    <div style="margin-top: 18px;">
+      <div class="grid-2" style="gap: 18px; margin-bottom: 28px;">
+        <ul class="bullets">
+          <li><span><span class="highlight">Already licensed, no new vendor.</span> Claude Enterprise is live for the division — no procurement cycle.</span></li>
+          <li><span><span class="highlight">Phase 1 runs in a browser tab.</span> No integration into Altéa, Salesforce, or Genesys until the extension.</span></li>
+          <li><span>Start with the <span class="highlight">5 most-referenced policy docs</span> — identified from week 1 escalation log analysis.</span></li>
+        </ul>
+        <ul class="bullets">
+          <li><span>Query interface is a <span class="highlight">pinned Claude Enterprise project</span> — no custom development required.</span></li>
+          <li><span>Test with <span class="highlight">one trainer + a new hire cohort</span> in week 5. Additive enrollment — agents onboarded individually, not switched en masse.</span></li>
+          <li><span><span class="highlight">Every query logged from Day 1</span> — the eval loop's raw material.</span></li>
+        </ul>
+      </div>
+      <div style="display: flex; align-items: stretch; gap: 0;">
+        <div style="flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center;">
+          <div style="font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-weight: 700;">Wks 1–2</div>
+          <div style="font-weight: 650; font-size: 14px; margin-bottom: 6px;">Discovery</div>
+          <p style="font-size: 12px; color: var(--muted); line-height: 1.4;">Observe work, audit escalation logs, inventory policy docs</p>
+        </div>
+        <div style="display: flex; align-items: center; padding: 0 12px; color: var(--muted); font-size: 20px;">→</div>
+        <div style="flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center;">
+          <div style="font-size: 11px; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-weight: 700;">Wks 3–5</div>
+          <div style="font-weight: 650; font-size: 14px; margin-bottom: 6px;">Phase 1 — Policy Q&amp;A</div>
+          <p style="font-size: 12px; color: var(--muted); line-height: 1.4;">5 docs → query interface → new hire cohort pilot</p>
+        </div>
+        <div style="display: flex; align-items: center; padding: 0 12px; color: var(--muted); font-size: 20px;">→</div>
+        <div style="flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center;">
+          <div style="font-size: 11px; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-weight: 700;">Wks 6–8</div>
+          <div style="font-weight: 650; font-size: 14px; margin-bottom: 6px;">Phase 2 — Training Sim</div>
+          <p style="font-size: 12px; color: var(--muted); line-height: 1.4;">Scenario library from escalation patterns. Pre-live practice.</p>
+        </div>
+        <div style="display: flex; align-items: center; padding: 0 12px; color: var(--muted); font-size: 20px;">→</div>
+        <div style="flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center;">
+          <div style="font-size: 11px; color: var(--amber); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-weight: 700;">Wks 9–12</div>
+          <div style="font-weight: 650; font-size: 14px; margin-bottom: 6px;">Phase 3 — Live Assist</div>
+          <p style="font-size: 12px; color: var(--muted); line-height: 1.4;">Proactive surfacing. Expand to second team. Begin extension scoping.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 12: AGENT EXPERIENCE -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">The Product</div>
+    <h2>What the agent experience looks like</h2>
+    <div class="grid-2" style="margin-top: 18px; align-items: start; gap: 56px;">
+      <div>
+        <div style="background: #080d1a; border: 1px solid var(--border); border-radius: 14px; overflow: hidden;">
+          <div style="background: #16233d; padding: 10px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border);">
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #f87171;"></div>
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--amber);"></div>
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--green);"></div>
+            <span style="font-size: 12px; color: var(--muted); margin-left: 8px;">Cascadia Knowledge Assistant</span>
+          </div>
+          <div style="padding: 20px;">
+            <div style="background: #16233d; border-radius: 8px; padding: 12px 14px; margin-bottom: 12px;">
+              <p style="color: var(--muted); margin-bottom: 4px; font-size: 11px;">AGENT</p>
+              <p style="font-size: 14px; color: var(--text);">Can I rebook this Gold member on United if the connecting city is Vancouver and they have a WCHR request?</p>
+            </div>
+            <div style="background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.2); border-radius: 8px; padding: 12px 14px;">
+              <p style="font-size: 11px; color: var(--blue); margin-bottom: 6px;">CASCADIA KNOWLEDGE ASSISTANT</p>
+              <p style="font-size: 14px; color: var(--text); line-height: 1.6;">Yes — United is on the Cascadia OAL agreement for YVR. Gold members are eligible for partner rebooking on same-day delay ≥2hr. <span class="amber">Note: WCHR requires pre-notification to United ops at least 2 hours before departure</span> — confirm this is feasible before rebooking.</p>
+              <p style="font-size: 11px; color: var(--muted); margin-top: 8px;">↗ Source: IROPS Reaccommodation Policy v4.2 §3.1 · Partner Carrier WCHR Protocol §7</p>
+            </div>
+            <div style="display: flex; gap: 8px; margin-top: 12px;">
+              <input style="flex: 1; background: #16233d; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; color: var(--muted); font-size: 13px; outline: none;" placeholder="Ask another question..." />
+              <div style="background: var(--blue); border-radius: 6px; width: 32px; display: flex; align-items: center; justify-content: center; font-size: 14px; color:#0a1120;">→</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="border-left: 1px solid var(--border); padding-left: 28px;">
+        <h3 style="margin-bottom: 12px; font-size: 15px;">Design principles</h3>
+        <ul class="bullets">
+          <li><span><span class="highlight">Every answer cites its source.</span> Agent can verify directly. Builds trust faster than accuracy claims alone.</span></li>
+          <li><span><span class="highlight">Flags the edge case</span> (WCHR pre-notification) that an agent might miss — this is where the system earns its value.</span></li>
+          <li><span><span class="highlight">Plain language, not policy legalese.</span> The answer is what the agent needs, not a policy quote.</span></li>
+          <li><span><span class="highlight">No GDS access.</span> Claude answers the question; the agent executes in Altéa. Clean separation of judgment and action.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- METRICS -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">Knowing It's Working</div>
+    <h2>What we measure — and when</h2>
+    <div class="grid-2" style="margin-top: 22px; align-items: start;">
+      <div>
+        <h3 style="margin-bottom: 12px; color: var(--blue);">Leading indicators <span style="font-size: 13px; font-weight: 400; color: var(--muted);">(visible weeks 4–6)</span></h3>
+        <ul class="bullets">
+          <li><span>Weekly active users in pilot cohort</span></li>
+          <li><span>Policy queries per active user per shift</span></li>
+          <li><span>Supervisor escalation rate from new agents <span class="highlight">(target: down 30% by week 8)</span></span></li>
+          <li><span>Answer accuracy rate in eval loop — test set drawn from Week 1 escalation logs, scored against known-good answers. Policy doc updates trigger a regression run against this set.</span></li>
+          <li><span>Email queue time <span style="color:var(--muted-dim);">(when wave 2 launches)</span></span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-bottom: 12px; color: var(--green);">Lagging indicators <span style="font-size: 13px; font-weight: 400; color: var(--muted);">(weeks 10–12+)</span></h3>
+        <ul class="bullets">
+          <li><span>Ramp time: weeks to proficiency <span class="highlight">(target: 8–10 wks → 4–5 wks)</span></span></li>
+          <li><span>Handle time gap: new agent vs. veteran <span class="highlight">(target: 2× → 1.3×)</span></span></li>
+          <li><span>First-call resolution rate for new agents</span></li>
+          <li><span>CSAT scores: new-agent-handled calls</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="discussion step-item">Are there metrics you'd weight differently — or that Cascadia's leadership cares about most right now?</div>
+  </div>
+
+  <!-- HOW TO SCALE -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">Enablement + Adoption</div>
+    <h2>Scaling from pilot to division</h2>
+    <div class="grid-2" style="margin-top: 22px; align-items: start;">
+      <ul class="bullets">
+        <li><span><span class="highlight">Start with new hires.</span> No ingrained habits to break. AI is the default from day one of training. Their success becomes social proof for veterans — "the people who just started are outperforming the curve."</span></li>
+        <li><span><span class="highlight">Build conditions, don't mandate.</span> Peer champions in each team. A visible win board showing before/after lookup times. Regular knowledge shares that feel approachable — not engineering-focused.</span></li>
+        <li><span><span class="highlight">Design for the aha moment.</span> Policy question answered in 20 seconds instead of 6 minutes. That's the moment behavior changes.</span></li>
+        <li><span><span class="highlight">Shadow mode as trust-building.</span> Supervisors see AI output alongside their own answers for 2 weeks. When they see it match — and sometimes catch something they'd have missed — that endorsement is worth more than any top-down mandate.</span></li>
+      </ul>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="card green-tint">
+          <h3 style="font-size: 15px; margin-bottom: 8px;" class="green">The flywheel</h3>
+          <p style="font-size: 14px;">New agents adopt AI as default → faster to proficiency → become veterans who use AI natively → model the behavior for the next cohort → 35% annual attrition becomes the adoption engine, not the problem.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size: 15px; margin-bottom: 8px;">What doesn't work</h3>
+          <ul class="bullets" style="margin-top: 4px;">
+            <li style="font-size: 13px;"><span>Mandatory training sessions that feel like compliance</span></li>
+            <li style="font-size: 13px;"><span>Top-down usage targets without workflow redesign</span></li>
+            <li style="font-size: 13px;"><span>Rolling out to all 3,000 before proving it with 30</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 15: CLOSE / EXTENSION -->
+  <div class="slide" data-index="m">
+    <div class="slide-label">Close</div>
+    <h2>What 12 weeks buys — and what comes next</h2>
+    <div class="grid-2" style="margin-top: 18px; align-items: start; gap: 26px;">
+      <div>
+        <h3 style="margin-bottom: 12px; color: var(--blue);">By week 12</h3>
+        <ul class="bullets">
+          <li><span>Knowledge system live; extension trigger thresholds met or on track</span></li>
+          <li><span>Strong directional data on ramp time and handle time gap</span></li>
+          <li><span>Disruption decision support scoped and ready to deploy on next major event</span></li>
+          <li><span>Division owns the knowledge base refresh cadence</span></li>
+        </ul>
+        <div class="card amber-tint" style="margin-top: 16px;">
+          <h3 style="font-size: 14px; margin-bottom: 6px;" class="amber">Extension trigger</h3>
+          <p style="font-size: 13px;">Escalation rate down ≥25% by week 8 + ≥60% weekly active usage. Hit that and the extension conversation writes itself.</p>
+          <p style="font-size: 12px; color: var(--muted); margin-top: 6px; font-style: italic;">Full ramp time proof is a 90-day story — we name that from day one.</p>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom: 12px;">Extension roadmap</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-weight: 650; font-size: 14px;">Disruption Decision Support</span>
+              <span class="badge amber">Extension 1</span>
+            </div>
+            <p style="font-size: 13px; margin-top: 6px;">Scoped in weeks 3–6. Deploys on next major IROPS event. Agent gets top 3 rebooking options ranked by tier and connection risk in 30 sec, not 8 min. A major disruption day generates 3–5× normal email and refund volume — getting rebooking right at the source reduces that downstream queue.</p>
+          </div>
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-weight: 650; font-size: 14px;">Email / Social Care</span>
+              <span class="badge amber">Extension 2</span>
+            </div>
+            <p style="font-size: 13px; margin-top: 6px;">50k emails/month, 4 days behind. AI drafts; human reviews; human publishes. Queue drops to same-day within 6 weeks. Tone risk is managed by the review gate.</p>
+          </div>
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-weight: 650; font-size: 14px;">Refunds / Claims Consistency</span>
+              <span class="badge green">Extension 3</span>
+            </div>
+            <p style="font-size: 13px; margin-top: 6px;">90k backlog, 1 in 5 with agent disagreement. AI applies compensation matrix consistently. Regulatory risk managed with tight eval criteria and human approval on every decision.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUESTIONS SLIDE -->
+  <div class="slide title-slide" data-index="m">
+    <div class="slide-label">Discussion</div>
+    <h1>Questions?</h1>
+    <p class="lead" style="max-width: 640px;">Happy to go deeper on any of the assumptions, the sequencing, the build, or what success looks like at week 12.</p>
+    <div class="divider"></div>
+    <div class="title-meta">
+      <div class="title-meta-item"><strong>Stephen Soward</strong></div>
+      <div class="title-meta-item">stephenmsoward@gmail.com</div>
+      <div class="title-meta-item" style="color: var(--muted-dim);">Appendix available → press A</div>
+    </div>
+  </div>
+
+  <!-- ===== APPENDIX ===== -->
+
+  <!-- A1: COMMON OBJECTIONS -->
+  <div class="slide" data-index="A">
+    <div class="appendix-tag">Appendix A1</div>
+    <div class="slide-label amber">Appendix — Common Objections</div>
+    <h2>Handling pushback</h2>
+    <div class="grid-2" style="margin-top: 16px; align-items: start; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="card">
+          <h3 style="font-size: 14px; color: var(--amber); margin-bottom: 6px;">"We already tried AI tools and nothing changed."</h3>
+          <p style="font-size: 13px;">That's the most important context I could have. Tools don't change behavior — redesigned workflows do. The 6-month, 15% usage story tells me exactly what didn't work: Claude was available but no workflow was built around it. That's what this engagement fixes.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size: 14px; color: var(--amber); margin-bottom: 6px;">"Our agents are worried about their jobs."</h3>
+          <p style="font-size: 13px;">A real concern — and it needs to be named at kickoff, not worked around. The goal is the Ikea model: AI absorbs lookup work, agents move up to judgment work. No airline running AI-assisted ops has cut frontline headcount — they've reallocated it to higher-value interactions.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size: 14px; color: var(--amber); margin-bottom: 6px;">"We can't share customer data with a third-party AI."</h3>
+          <p style="font-size: 13px;">Claude Enterprise is designed for this. Customer PII stays within the airline's environment — it doesn't leave to train external models. The knowledge base contains policy docs, not customer records. Data governance is a design conversation in discovery, not a blocker.</p>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="card blue-tint">
+          <h3 style="font-size: 14px; color: var(--blue); margin-bottom: 6px;">"Why Claude and not the AI built into Salesforce / Microsoft / Genesys?"</h3>
+          <p style="font-size: 13px;">Those native copilots are good — but each is locked to one vendor's data and roadmap. You'd get four disconnected assistants. Claude Enterprise is one reasoning layer that spans all of them. And the core problem — interpreting fare rules and policy consistently — is a reasoning problem, which is exactly where Claude leads.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size: 14px; color: var(--amber); margin-bottom: 6px;">"Why not just hire more agents?"</h3>
+          <p style="font-size: 13px;">35% annual attrition means Cascadia is already on a treadmill — every hire takes 8–10 weeks to reach proficiency, and a third leave within a year. Hiring more doesn't solve knowledge transfer; it makes it worse at scale. The math only improves if ramp time drops and veteran-level performance arrives sooner.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size: 14px; color: var(--amber); margin-bottom: 6px;">"Won't training new agents first make veterans feel bypassed?"</h3>
+          <p style="font-size: 13px;">Fair concern — and we address it directly at kickoff. Veterans run shadow mode in parallel: they see AI outputs alongside their own answers for two weeks. Their expertise is the benchmark the system is measured against. When they see it match — and sometimes catch something they'd have missed — that endorsement is worth more than any top-down push.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A2: RISK REGISTER -->
+  <div class="slide" data-index="A">
+    <div class="appendix-tag">Appendix A2</div>
+    <div class="slide-label amber">Appendix — Risk Register</div>
+    <h2>What could derail this — and how we design against it</h2>
+    <div class="grid-3" style="margin-top: 22px; gap: 18px; align-items: start;">
+      <div class="card red-tint">
+        <h3 style="font-size: 14px; color: var(--red); margin-bottom: 10px;">Knowledge base returns a wrong answer</h3>
+        <p style="font-size: 13px; color: var(--muted); margin-bottom: 10px;"><strong style="color:var(--text);">What it looks like:</strong> Agent cites an answer based on an outdated or ambiguous policy section on a live call.</p>
+        <p style="font-size: 13px; color: var(--muted);"><strong style="color:var(--green);">Design against it:</strong> Eval test set from Day 1 — questions drawn from Week 1 escalation logs, scored against known-good answers. Shadow mode before any live use. Human judgment gate on every answer: the agent reads and decides. Nothing goes directly to the customer.</p>
+      </div>
+      <div class="card red-tint">
+        <h3 style="font-size: 14px; color: var(--red); margin-bottom: 10px;">Veteran agents undermine the pilot</h3>
+        <p style="font-size: 13px; color: var(--muted); margin-bottom: 10px;"><strong style="color:var(--text);">What it looks like:</strong> Experienced agents dismiss the tool publicly before it has a fair run — poisoning perception with the new hire cohort.</p>
+        <p style="font-size: 13px; color: var(--muted);"><strong style="color:var(--green);">Design against it:</strong> Shadow mode makes their expertise the benchmark — they grade the system, not the other way around. The first two weeks give them authority over the evaluation. Their endorsement is earned, not assumed.</p>
+      </div>
+      <div class="card red-tint">
+        <h3 style="font-size: 14px; color: var(--red); margin-bottom: 10px;">Policy changes outpace the knowledge base</h3>
+        <p style="font-size: 13px; color: var(--muted); margin-bottom: 10px;"><strong style="color:var(--text);">What it looks like:</strong> A fare rule changes; the knowledge base answers with the old rule for weeks before anyone notices.</p>
+        <p style="font-size: 13px; color: var(--muted);"><strong style="color:var(--green);">Design against it:</strong> Training team owns the refresh cadence from handoff. Policy update triggers a regression run against the eval test set. Version-controlled policy doc library with a change log.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top: 18px; padding: 13px 20px;">
+      <p style="font-size: 13px; max-width: none; color: var(--muted);">A fourth risk worth naming: scope creep into integration work during Phase 1. The fix is an explicit scope boundary — Phase 1 runs in a browser tab, intentionally. Altéa and Salesforce integration is scoped for the extension.</p>
+    </div>
+  </div>
+
+  <!-- A3: DISCOVERY METHODOLOGY -->
+  <div class="slide" data-index="A">
+    <div class="appendix-tag">Appendix A3</div>
+    <div class="slide-label amber">Appendix — Discovery Methodology</div>
+    <h2>How I'd run discovery — weeks 1–2</h2>
+    <div class="grid-2" style="margin-top: 16px; align-items: start;">
+      <div>
+        <table class="score-table" style="font-size: 13px;">
+          <thead>
+            <tr><th>Method</th><th>Who</th><th>What you're learning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="row-name">Agent shadow sessions</td><td>6–8 agents, varied tenure</td><td>Actual vs. stated workflow — where do they pause, escalate, toggle screens</td></tr>
+            <tr><td class="row-name">Stakeholder 1-on-1s</td><td>VP, center managers, IT</td><td>Business pressure, what's been tried, who's excited vs. threatened</td></tr>
+            <tr><td class="row-name">Agent roundtables</td><td>Groups of 4–6 by team</td><td>Peer dynamics, informal workarounds, what they'd ask for</td></tr>
+            <tr><td class="row-name">Supervisor 1-on-1s</td><td>Team leads</td><td>Top escalation causes, most-repeated questions, where new agents break</td></tr>
+            <tr><td class="row-name">Data audit</td><td>Ticketing + CSAT logs</td><td>Baseline metrics, query type frequency, tenure vs. performance gap</td></tr>
+            <tr><td class="row-name">Pulse survey</td><td>All 3,000 (day 1)</td><td>Current Claude usage, time sinks, comfort level, concerns — baseline for later</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3 style="font-size: 14px; margin-bottom: 10px;">Key questions by audience</h3>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="card" style="padding: 12px 16px;">
+            <p style="font-size: 12px; color: var(--blue); margin-bottom: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Agents</p>
+            <ul class="bullets">
+              <li style="font-size: 13px;"><span>"Walk me through the last call where you had to put someone on hold — what were you looking for?"</span></li>
+              <li style="font-size: 13px;"><span>"If you could have someone sitting next to you doing just one thing, what would it be?"</span></li>
+              <li style="font-size: 13px;"><span>"How do you find out when a policy changes?"</span></li>
+              <li style="font-size: 13px;"><span>"What took the longest to learn in your first few months — and what still slows you down now?"</span></li>
+            </ul>
+          </div>
+          <div class="card" style="padding: 12px 16px;">
+            <p style="font-size: 12px; color: var(--amber); margin-bottom: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Supervisors</p>
+            <ul class="bullets">
+              <li style="font-size: 13px;"><span>"What are the top three questions new agents ask in their first month?"</span></li>
+              <li style="font-size: 13px;"><span>"When two agents disagree on a decision, what's usually the cause?"</span></li>
+              <li style="font-size: 13px;"><span>"What's the thing you answer ten times a day that shouldn't require you?"</span></li>
+              <li style="font-size: 13px;"><span>"Why do you think new agents take twice as long as veterans — is it policy knowledge, system fluency, something else?"</span></li>
+            </ul>
+          </div>
+          <div class="card" style="padding: 12px 16px;">
+            <p style="font-size: 12px; color: var(--green); margin-bottom: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">VP / Leadership</p>
+            <ul class="bullets">
+              <li style="font-size: 13px;"><span>"What does success look like at week 12 for this engagement?"</span></li>
+              <li style="font-size: 13px;"><span>"What's been tried before with AI or automation? What happened?"</span></li>
+              <li style="font-size: 13px;"><span>"Who's your most skeptical person? Who's your most excited?"</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A4: WORKFLOW DETAIL -->
+  <div class="slide" data-index="A">
+    <div class="appendix-tag">Appendix A4</div>
+    <div class="slide-label amber">Appendix — Workflow Detail</div>
+    <h2>Agent Knowledge: Full Before / After</h2>
+    <div style="margin-top: 18px;">
+      <h3 style="font-size: 14px; color: var(--red); margin-bottom: 8px;">TODAY</h3>
+      <div class="flow" style="margin-bottom: 22px;">
+        <div><div class="flow-step">Customer calls</div></div>
+        <div class="flow-arrow">→</div>
+        <div><div class="flow-step pain">Agent pulls PNR in GDS<br><span style="font-size:11px;">Altéa / Sabre</span></div><span class="flow-time">1 min</span></div>
+        <div class="flow-arrow">→</div>
+        <div><div class="flow-step pain">Searches policy PDFs<br><span style="font-size:11px;">12+ docs, no unified search</span></div><span class="flow-time">2–3 min</span></div>
+        <div class="flow-arrow">→</div>
+        <div><div class="flow-step pain">Supervisor escalation<br><span style="font-size:11px;">if still unclear</span></div><span class="flow-time">+ wait</span></div>
+        <div class="flow-arrow">→</div>
+        <div><div class="flow-step pain">Answer — inconsistent<br><span style="font-size:11px;">1 in 5 disputes</span></div></div>
+        <div class="flow-arrow">→</div>
+        <div><div class="flow-step pain">ACW: manual CRM entry<br><span style="font-size:11px;">3–5 min</span></div><span class="flow-time">3–5 min</span></div>
+      </div>
+      <h3 style="font-size: 14px; color: var(--green); margin-bottom: 8px;">AFTER — Phase 1 (Weeks 3–5)</h3>
+      <div class="flow" style="margin-bottom: 22px;">
+        <div><div class="flow-step">Customer calls</div></div>
+        <div class="flow-arrow">→</div>
+        <div><div class="flow-step human">Agent pulls PNR<br><span style="font-size:11px;">unchanged</span></div></div>
+        <div class="flow-arrow">→</div>
+        <div><div class="flow-step ai">Types question to Claude<br><span style="font-size:11px;">natural language</span></div><span class="flow-time" style="color:var(--blue);">10 sec</span></div>
+        <div class="flow-arrow">→</div>
+        <div><div class="flow-step ai">Cited answer returned<br><span style="font-size:11px;">from verified policy docs</span></div><span class="flow-time" style="color:var(--blue);">15 sec</span></div>
+        <div class="flow-arrow">→</div>
+        <div><div class="flow-step human">Agent reviews &amp; answers<br><span style="font-size:11px;">human judgment stays</span></div></div>
+        <div class="flow-arrow">→</div>
+        <div><div class="flow-step ai">Claude drafts CRM entry<br><span style="font-size:11px;">agent approves</span></div><span class="flow-time" style="color:var(--blue);">30 sec</span></div>
+      </div>
+      <div class="grid-3" style="gap: 14px;">
+        <div class="card"><p style="font-size: 13px;"><span class="green">↓ 80%</span> reduction in policy lookup time</p></div>
+        <div class="card"><p style="font-size: 13px;"><span class="green">↓ 30%+</span> supervisor escalations from new agents (target, week 8)</p></div>
+        <div class="card"><p style="font-size: 13px;"><span class="green">↓ 2–4 min</span> ACW per call via assisted CRM entry</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A5: EXTENSION DESIGN -->
+  <div class="slide" data-index="A">
+    <div class="appendix-tag">Appendix A5</div>
+    <div class="slide-label amber">Appendix — Extension Design</div>
+    <h2>Disruption Rebooking: Scoped for Extension</h2>
+    <div class="grid-2" style="margin-top: 18px; align-items: start;">
+      <div>
+        <h3 style="margin-bottom: 10px; font-size: 15px;">Why it's Extension 1, not Wave 1</h3>
+        <ul class="bullets" style="margin-bottom: 22px;">
+          <li><span>Only ~18 major disruption days/year — can't iterate quickly during pilot if events are sparse</span></li>
+          <li><span>Phase 1 requires GDS integration (PNR context + live inventory) — more complex build than knowledge base</span></li>
+          <li><span>But: we scope it completely in weeks 3–6 so it's ready to deploy the moment the next event hits</span></li>
+        </ul>
+        <h3 style="margin-bottom: 10px; font-size: 15px;">The decision support design</h3>
+        <ul class="bullets">
+          <li><span>Agent pastes PNR context into Claude (or lightweight integration pulls it)</span></li>
+          <li><span>Claude has: reaccommodation policy, partner carrier inventory snapshot, passenger tier status, SSRs</span></li>
+          <li><span>Returns: top 3 rebooking options ranked by tier priority and connection risk, with relevant rule cited</span></li>
+          <li><span>Agent selects, executes in Altéa/Sabre — Claude doesn't touch the GDS</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="card blue-tint" style="margin-bottom: 16px;">
+          <h3 style="font-size: 14px; margin-bottom: 8px;">Before vs. after on a disruption day</h3>
+          <table style="width: 100%; font-size: 13px; border-collapse: collapse;">
+            <tr><td style="padding: 6px 0; color: var(--muted); border-bottom: 1px solid var(--border);">Decision time per rebooking</td><td style="padding: 6px 0; color: var(--red);">6–8 min</td><td style="padding: 6px 0; color: var(--green);">~30 sec</td></tr>
+            <tr><td style="padding: 6px 0; color: var(--muted); border-bottom: 1px solid var(--border);">Hold time (major disruption)</td><td style="padding: 6px 0; color: var(--red);">60+ min</td><td style="padding: 6px 0; color: var(--green);">Target: &lt;20 min</td></tr>
+            <tr><td style="padding: 6px 0; color: var(--muted);">SSR consideration rate</td><td style="padding: 6px 0; color: var(--red);">Inconsistent</td><td style="padding: 6px 0; color: var(--green);">Systematic</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <h3 style="font-size: 14px; margin-bottom: 6px;">Training before the event</h3>
+          <p style="font-size: 13px;">Minor IROPS events (weather delays, single-flight cancellations) happen far more frequently — these are the training reps. Agents practice the workflow on lower-stakes days so the first major deployment is a drill, not a debut.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- A7: IKEA UPSKILLING MODEL -->
+  <div class="slide" data-index="A">
+    <div class="appendix-tag">Appendix A6</div>
+    <div class="slide-label amber">Appendix — Workforce Evolution</div>
+    <h2>What the Ikea path actually looks like for agents</h2>
+    <div class="grid-2" style="margin-top: 20px; align-items: start; gap: 26px;">
+      <div>
+        <p style="font-size: 15px; color: var(--muted); margin-bottom: 22px; max-width: none;">As AI absorbs commodity work — policy lookups, draft responses, CRM logging — the agent's job changes. The question is whether that change is designed intentionally or left to chance.</p>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="card green-tint">
+            <h3 style="font-size: 15px; margin-bottom: 8px;" class="green">Travel Consultant Advisors</h3>
+            <p style="font-size: 13px;">For business accounts and top-tier loyalty members, experienced agents become proactive advisors — anticipating disruption before customers call, managing complex itineraries across carriers, and handling the moments where policy alone isn't enough. This is a job that's harder to automate and more satisfying to do.</p>
+          </div>
+          <div class="card green-tint">
+            <h3 style="font-size: 15px; margin-bottom: 8px;" class="green">Proactive Disruption Support</h3>
+            <p style="font-size: 13px;">For loyalty members during an IROPS event: instead of waiting for the customer to call, AI identifies affected passengers, surfaces rebooking options, and agents reach out proactively. "We've already rebooked you on the 3pm — here are your options." This turns a service failure into a loyalty moment.</p>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="card">
+          <h3 style="font-size: 15px; margin-bottom: 10px;">The role evolution arc</h3>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: flex-start; gap: 14px;">
+              <div style="flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--red-dim); border: 1px solid rgba(248,113,113,0.3); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--red); font-weight: 700;">1</div>
+              <div><p style="font-size: 13px; color: var(--muted); max-width: none;"><strong style="color: var(--text);">Today:</strong> Policy executor. Spends 40–60% of call time looking up rules, putting customers on hold, confirming with supervisors.</p></div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 14px;">
+              <div style="flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--blue-dim); border: 1px solid rgba(96,165,250,0.3); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--blue); font-weight: 700;">2</div>
+              <div><p style="font-size: 13px; color: var(--muted); max-width: none;"><strong style="color: var(--text);">Wave 1–2:</strong> Augmented handler. AI retrieves policy instantly; agent focuses on judgment, tone, and de-escalation. Handle time drops. CSAT improves.</p></div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 14px;">
+              <div style="flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--green-dim); border: 1px solid rgba(52,211,153,0.3); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--green); font-weight: 700;">3</div>
+              <div><p style="font-size: 13px; color: var(--muted); max-width: none;"><strong style="color: var(--text);">Extension:</strong> Trusted advisor. Handles complexity that AI can't — ambiguous situations, high-value relationships, proactive outreach. The job is harder to replace and more engaging to do.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="font-size: 14px; margin-bottom: 6px;">The attrition implication</h3>
+          <p style="font-size: 13px;">35% annual attrition is partly a job satisfaction problem. A role where AI handles the grind — and humans handle the judgment — is a meaningfully better job. Over 12–18 months, that shift may improve retention in ways that no hiring program can match.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A8: END-CUSTOMER BEFORE / AFTER -->
+  <div class="slide" data-index="A">
+    <div class="appendix-tag">Appendix A7</div>
+    <div class="slide-label amber">Appendix — Customer Experience</div>
+    <h2>What the end customer actually experiences</h2>
+    <div class="grid-2" style="margin-top: 20px; align-items: start; gap: 26px;">
+      <div>
+        <h3 style="font-size: 14px; color: var(--red); margin-bottom: 14px;">Before — today's experience</h3>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="card red-tint" style="padding: 14px 18px;">
+            <p style="font-size: 13px; max-width: none;"><strong style="color: var(--text);">Disruption scenario:</strong> Flight cancelled. Customer calls. Placed on hold for 45–60 minutes during peak demand. Agent takes another 6–8 minutes to find rebooking options. Final answer may differ from what a different agent would have given 20 minutes later.</p>
+          </div>
+          <div class="card red-tint" style="padding: 14px 18px;">
+            <p style="font-size: 13px; max-width: none;"><strong style="color: var(--text);">Refund scenario:</strong> Submits a claim. Waits 35 days on average. No proactive status update. Receives a decision that 1 in 5 agents would have made differently. May need to escalate to get a second review.</p>
+          </div>
+          <div class="card red-tint" style="padding: 14px 18px;">
+            <p style="font-size: 13px; max-width: none;"><strong style="color: var(--text);">Email scenario:</strong> Sends a complaint after a bad experience. Receives a response 4 days later. Tone is inconsistent with prior correspondence. No acknowledgment of their loyalty status.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size: 14px; color: var(--green); margin-bottom: 14px;">After — redesigned experience</h3>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="card green-tint" style="padding: 14px 18px;">
+            <p style="font-size: 13px; max-width: none;"><strong style="color: var(--text);">Disruption scenario:</strong> Agent gets rebooking options in 30 seconds, not 8 minutes. Hold time drops. For loyalty members, proactive outreach — "we saw your flight was cancelled and have already found you an alternative." Consistency improves because AI applies the same rules every time.</p>
+          </div>
+          <div class="card green-tint" style="padding: 14px 18px;">
+            <p style="font-size: 13px; max-width: none;"><strong style="color: var(--text);">Refund scenario:</strong> AI applies the compensation matrix consistently. Agents spend less time on policy lookup, more time on edge cases that genuinely need judgment. Resolution time shortens as backlog clears. Fewer disputes because the first answer was right.</p>
+          </div>
+          <div class="card green-tint" style="padding: 14px 18px;">
+            <p style="font-size: 13px; max-width: none;"><strong style="color: var(--text);">Email scenario:</strong> AI drafts a response within minutes; agent reviews and publishes. Queue goes from 4 days to same-day. Tone is consistent. Loyalty status is acknowledged. The customer feels seen, not processed.</p>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 10px; padding: 12px 16px;">
+          <p style="font-size: 12px; color: var(--muted); max-width: none;">The customer doesn't care whether AI is involved. They care that the answer was fast, correct, and consistent. That's what this engagement is designed to deliver.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A8: SOURCES -->
+  <div class="slide" data-index="A">
+    <div class="appendix-tag">Appendix A8</div>
+    <div class="slide-label amber">Appendix — Sources</div>
+    <h2>Research consulted</h2>
+    <div class="grid-2" style="margin-top: 16px; align-items: start; gap: 26px;">
+      <div style="display: flex; flex-direction: column; gap: 11px;">
+        <div class="slide-label green" style="margin-bottom: 2px;">Recent (2025–26)</div>
+        <div class="card" style="padding: 14px 18px;">
+          <h3 style="font-size: 13.5px; margin-bottom: 4px; color: var(--blue);">CX Dive: Delta launches "Delta Concierge" (Oct 2025)</h3>
+          <p style="font-size: 12.5px;">Real, current deployment: generative-AI assistant in the Fly Delta app, framed as a bridge between self-service and live agents — not a replacement for them.</p>
+          <a class="src-link" href="https://www.customerexperiencedive.com/news/delta-begins-roll-out-generative-ai-virtual-assistant-concierge/803899/" target="_blank">customerexperiencedive.com</a>
+        </div>
+        <div class="card" style="padding: 14px 18px;">
+          <h3 style="font-size: 13.5px; margin-bottom: 4px; color: var(--blue);">Calabrio: State of the Contact Center (2025)</h3>
+          <p style="font-size: 12.5px;">Mirrors Cascadia exactly: ~98% of contact centers use some AI, but few have it integrated; 32% cite agent distrust in AI; 30% report poor system integration.</p>
+          <a class="src-link" href="https://www.calabrio.com/state-of-the-contact-center-2025/" target="_blank">calabrio.com — 2025 report</a>
+        </div>
+        <div class="card" style="padding: 14px 18px;">
+          <h3 style="font-size: 13.5px; margin-bottom: 4px; color: var(--blue);">BCG: Digital Strategy Can Take Airlines to New Heights (2025)</h3>
+          <p style="font-size: 12.5px;">Customer ops cited as one of the highest-ROI areas for AI. 15–25% operational cost reduction at early movers.</p>
+          <a class="src-link" href="https://www.bcg.com/publications/2025/digital-strategy-can-take-airlines-to-new-heights" target="_blank">bcg.com — 2025 publication</a>
+        </div>
+        <div class="card" style="padding: 14px 18px;">
+          <h3 style="font-size: 13.5px; margin-bottom: 4px; color: var(--blue);">Klarna AI Customer Service — Public Reporting (2025)</h3>
+          <p style="font-size: 12.5px;">The cautionary tale on Slide 3: Klarna claimed AI replaced ~700 agents, then resumed hiring humans as complexity exceeded what AI handled reliably. Design &gt; tool.</p>
+          <a class="src-link" href="https://www.entrepreneur.com/business-news/klarna-ceo-reverses-course-by-hiring-more-humans-not-ai/491396" target="_blank">entrepreneur.com — Klarna reverses course</a>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 11px;">
+        <div class="slide-label" style="margin-bottom: 2px;">Foundational &amp; reference</div>
+        <div class="card" style="padding: 14px 18px;">
+          <h3 style="font-size: 13.5px; margin-bottom: 4px; color: var(--blue);">Amadeus: Shaping the Future of Airline Disruption Management</h3>
+          <p style="font-size: 12.5px;">The IROPS operational primer from the leading GDS/PSS vendor. Source of the "decision support layer" framing — AI collapses 6–8 min of evaluation to ~30 sec; agent still executes in Altéa.</p>
+          <a class="src-link" href="https://amadeus.com/documents/en/airlines/white-paper/shaping-the-future-of-airline-disruption-management.pdf" target="_blank">amadeus.com — white paper (PDF)</a>
+        </div>
+        <div class="card" style="padding: 14px 18px;">
+          <h3 style="font-size: 13.5px; margin-bottom: 4px; color: var(--blue);">Delta IROPS Rebooking Policy for Travel Agency Partners</h3>
+          <p style="font-size: 12.5px;">An actual agent-facing policy doc — the density of fare rules and partner-carrier conditions that grounds the "today's workflow" slide.</p>
+          <a class="src-link" href="https://pro.delta.com/content/agency/us/en/policy-library/schedule-change-and-irregular-operations/irregular-operations-rebooking-policy-for-travel-agency-partners.html" target="_blank">pro.delta.com — policy library</a>
+        </div>
+        <div class="card" style="padding: 14px 18px;">
+          <h3 style="font-size: 13.5px; margin-bottom: 4px; color: var(--blue);">McKinsey: Travel Distribution — Customer Experience <span style="color:var(--muted-dim); font-weight:400;">(2017)</span></h3>
+          <p style="font-size: 12.5px;">Older, but still the cleanest articulation of the structural problem: customer data fragmented across PSS, CRM, and loyalty systems is the root of inconsistent service.</p>
+          <a class="src-link" href="https://www.mckinsey.com/industries/travel/our-insights/the-ongoing-trouble-with-travel-distribution-customer-experience" target="_blank">mckinsey.com — Travel insights</a>
+        </div>
+        <div class="card" style="padding: 14px 18px;">
+          <h3 style="font-size: 13.5px; margin-bottom: 4px; color: var(--blue);">APEX + Skift Research</h3>
+          <p style="font-size: 12.5px;">APEX: practitioner-level airline CX benchmarks. Skift Research: ongoing coverage of which carriers are moving on digital, and how fast.</p>
+          <a class="src-link" href="https://apex.aero" target="_blank">apex.aero</a> &nbsp;·&nbsp; <a class="src-link" href="https://skift.com/research/" target="_blank" style="margin-top:0;">skift.com/research</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end deck -->
+
+<!-- NAVIGATION -->
+<div id="nav">
+  <button class="nav-btn" id="prev-btn" onclick="navigate(-1)" disabled>←</button>
+  <span id="slide-count">1 / 17</span>
+  <button class="nav-btn" id="next-btn" onclick="navigate(1)">→</button>
+</div>
+
+<div id="keyhint">← → to navigate · A for appendix</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const mainSlides = slides.filter(s => !s.dataset.index.startsWith('A'));
+  const appendixSlides = slides.filter(s => s.dataset.index.startsWith('A'));
+  let current = 0;
+
+  function getLabel(idx) {
+    const s = slides[idx];
+    if (s.dataset.index.startsWith('A')) {
+      return `A${appendixSlides.indexOf(s) + 1} / A${appendixSlides.length}`;
+    }
+    return `${mainSlides.indexOf(s) + 1} / ${mainSlides.length}`;
+  }
+
+  function revealSteps(slide, dir) {
+    const steps = Array.from(slide.querySelectorAll('.step-item'));
+    if (!steps.length) return;
+    if (dir === -1) {
+      steps.forEach(s => s.classList.add('revealed'));
+    } else {
+      steps.forEach(s => s.classList.remove('revealed'));
+      if (steps.length > 1) {
+        setTimeout(() => { if (steps[0]) steps[0].classList.add('revealed'); }, 80);
+      }
+    }
+  }
+
+  function navigate(dir) {
+    const currentSlide = slides[current];
+    if (dir === 1) {
+      // Reveal next hidden step instead of advancing if steps remain
+      const unrevealed = currentSlide.querySelector('.step-item:not(.revealed)');
+      if (unrevealed) { unrevealed.classList.add('revealed'); return; }
+    }
+    currentSlide.classList.remove('active');
+    current = Math.max(0, Math.min(slides.length - 1, current + dir));
+    slides[current].classList.add('active');
+    revealSteps(slides[current], dir);
+    update();
+  }
+
+  function jumpToAppendix() {
+    slides[current].classList.remove('active');
+    current = slides.indexOf(appendixSlides[0]);
+    slides[current].classList.add('active');
+    revealSteps(slides[current], 1);
+    update();
+  }
+
+  function update() {
+    document.getElementById('slide-count').textContent = getLabel(current);
+    document.getElementById('prev-btn').disabled = current === 0;
+    document.getElementById('next-btn').disabled = current === slides.length - 1;
+    const pct = ((current + 1) / slides.length) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') navigate(-1);
+    if (e.key === 'a' || e.key === 'A') jumpToAppendix();
+  });
+
+  update();
+</script>
+
+</body>
+</html>
