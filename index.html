@@ -844,15 +844,21 @@
           <li><span>Map the trust landscape before anything else — who's excited, who's quietly threatened, who holds the informal knowledge.</span></li>
         </ul>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <div class="card">
-          <h3 style="font-size: 15px; margin-bottom: 10px;" class="red">Agent trust problem</h3>
-          <p style="font-size: 14px;">Experienced agents have built their value around knowing the policies. For them, AI that retrieves policy threatens something they've earned. The design has to give them a way to bring that expertise into the system — not route around it.</p>
-        </div>
-        <div class="card">
-          <h3 style="font-size: 15px; margin-bottom: 10px;" class="amber">Customer trust problem</h3>
-          <p style="font-size: 14px;">Customers are conditioned by years of bad automation — IVR trees that don't resolve anything, bot replies that feel canned. A poorly designed AI layer reinforces exactly that expectation. The human stays visibly in the loop at every customer-facing touchpoint.</p>
-        </div>
+      <div>
+        <p style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px;">Discovery methods — weeks 1–2</p>
+        <table class="score-table" style="font-size: 12px;">
+          <thead>
+            <tr><th>Method</th><th>What you're learning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="row-name">Agent shadow sessions</td><td>Actual vs. stated workflow — where they pause, escalate, toggle screens</td></tr>
+            <tr><td class="row-name">Stakeholder 1-on-1s</td><td>Business pressure, what's been tried, who's excited vs. threatened</td></tr>
+            <tr><td class="row-name">Agent roundtables</td><td>Peer dynamics, informal workarounds, what they'd ask for</td></tr>
+            <tr><td class="row-name">Supervisor 1-on-1s</td><td>Top escalation causes, most-repeated questions, where new agents break</td></tr>
+            <tr><td class="row-name">Data audit</td><td>Baseline metrics, query type frequency, tenure vs. performance gap</td></tr>
+            <tr><td class="row-name">Pulse survey</td><td>Current Claude usage, time sinks, comfort level — baseline for later</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <p style="font-size: 12px; color: var(--muted-dim); margin-top: 18px;">↗ Full discovery question set and interview methodology — <span class="appendix-link" onclick="jumpToSlide(3)">Appendix A3</span></p>
@@ -961,7 +967,7 @@
             <li><span><span class="highlight">Adoption flywheel:</span> new agents learn AI as their default. As they become veterans, that behavior stays. Habit becomes the default without needing a mandate.</span></li>
             <li><span><span class="highlight">Fast proof:</span> policy lookup speed is measurable in week 3. We don't wait 12 weeks for signal.</span></li>
             <li><span><span class="highlight">Unlocks the roadmap:</span> disruption decision support and email drafting both build on this same knowledge layer — the foundation is shared.</span></li>
-            <li><span><span class="highlight">Not Disruption Decision Support first:</span> compelling use case, wrong pilot — high-stakes decisions on 18 days/year are where you need a proven system, not where you build trust in a new one.</span></li>
+            <li><span><span class="highlight">What about disruption booking?</span> Compelling use case, clear AI fit — but you want a proven system for your 18 highest-stakes days of the year, not an emerging one. We build to it, not with it.</span></li>
           </ul>
         </div>
       </div>
@@ -1022,7 +1028,7 @@
     <div class="flow flow-stepped" style="margin-bottom: 22px;">
       <div><div class="flow-step">Customer on hold</div></div>
       <div class="flow-arrow">→</div>
-      <div class="step-item"><div class="flow-step ai">Agent types natural<br>language question</div><span class="flow-time" style="color: var(--blue);">10 sec</span></div>
+      <div class="step-item"><div class="flow-step ai">Agent types natural<br>language question</div><span class="flow-time" style="color: var(--blue);">10–30 sec</span></div>
       <div class="flow-arrow">→</div>
       <div class="step-item"><div class="flow-step ai">Claude searches<br>knowledge base</div><span class="flow-time" style="color: var(--blue);">5 sec</span></div>
       <div class="flow-arrow">→</div>
@@ -1089,13 +1095,13 @@
         <ul class="bullets">
           <li><span><span class="highlight">Already licensed, no new vendor.</span> Claude Enterprise is live for the division — no procurement cycle.</span></li>
           <li><span><span class="highlight">Phase 1 runs in a browser tab.</span> No integration into Altéa, Salesforce, or Genesys until the extension.</span></li>
-          <li><span>Start with the <span class="highlight">5 most-referenced policy docs</span> — identified from week 1 escalation log analysis.</span></li>
+          <li><span>Query interface is a <span class="highlight">pinned Claude Enterprise project</span> — no custom development required.</span></li>
         </ul>
         <ul class="bullets">
-          <li><span>Query interface is a <span class="highlight">pinned Claude Enterprise project</span> — no custom development required.</span></li>
+          <li><span>Start with the <span class="highlight">5 most-referenced policy docs</span> — identified from week 1 escalation log analysis.</span></li>
           <li><span>Test with <span class="highlight">one trainer + a new hire cohort</span> in week 5. Additive enrollment — agents onboarded individually, not switched all at once.</span></li>
-          <li><span><span class="highlight">Every query logged from Day 1</span> — what we use to test and score answer quality.</span></li>
           <li><span>Policy doc refresh <span class="highlight">owned by the training team</span> from week 1 — update the source file, the knowledge base updates. No manual distribution, no outdated copies in circulation.</span></li>
+          <li><span><span class="highlight">Every query logged from Day 1</span> — what we use to test and score answer quality.</span></li>
         </ul>
       </div>
     </div>
@@ -1134,7 +1140,7 @@
       <div style="border-left: 1px solid var(--border); padding-left: 28px;">
         <h3 style="margin-bottom: 12px; font-size: 15px;">Design principles</h3>
         <ul class="bullets">
-          <li><span><span class="highlight">Every answer cites its source.</span> Agent can verify directly. Builds trust faster than accuracy claims alone.</span></li>
+          <li><span><span class="highlight">Every answer cites its source.</span> Agent can verify directly — and citations are what make the eval loop scorable. Trust and measurability from the same design decision.</span></li>
           <li><span><span class="highlight">Flags the edge case</span> (WCHR pre-notification) that an agent might miss — this is where the system earns its value.</span></li>
           <li><span><span class="highlight">Plain language, not policy legalese.</span> The answer is what the agent needs, not a policy quote.</span></li>
           <li><span><span class="highlight">No GDS access.</span> Claude answers the question; the agent executes in Altéa. Clean separation of judgment and action.</span></li>
